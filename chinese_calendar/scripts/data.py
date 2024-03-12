@@ -27,7 +27,7 @@ class Holiday(Enum):
     tomb_sweeping_day = "Tomb-sweeping Day", "清明", 1
     labour_day = "Labour Day", "劳动节", 1
     dragon_boat_festival = "Dragon Boat Festival", "端午", 1
-    hot_vacations = "Hot Weather Vacation", "高温假", 5
+    hot_weather_vacations = "Hot Weather Vacation", "高温假", 5
     national_day = "National Day", "国庆节", 3
     mid_autumn_festival = "Mid-autumn Festival", "中秋", 1
 
@@ -75,8 +75,8 @@ class Arrangement(object):
         四、劳动节：5月1日至5日放假调休，共5天。4月28日（星期日）、5月11日（星期六）上班。
         五、端午节：6月10日放假，与周末连休。
         六、高温假：8月5日至8月9日放假。
-        六、中秋节：9月15日至17日放假调休，共3天。9月14日（星期六）上班。
-        七、国庆节：10月1日至7日放假调休，共7天。9月29日（星期日）、10月12日（星期六）上班。
+        七、中秋节：9月15日至17日放假调休，共3天。9月14日（星期六）上班。
+        八、国庆节：10月1日至7日放假调休，共7天。9月29日（星期日）、10月12日（星期六）上班。
         """
         self.year_at(2024) \
             .nyd().rest(1, 1) \
@@ -84,7 +84,7 @@ class Arrangement(object):
             .tsd().rest(4, 4).to(4, 6).work(4, 7).in_lieu(4, 5) \
             .ld().rest(5, 1).to(5, 5).work(4, 28).work(5, 11).in_lieu(5, 2).to(5, 3) \
             .dbf().rest(6, 10) \
-            .hv().rest(8, 5).to(8, 9) \
+            .hwv().rest(8, 5).to(8, 9) \
             .maf().rest(9, 15).to(9, 17).work(9, 14).in_lieu(9, 16) \
             .nd().rest(10, 1).to(10, 7).work(9, 29).work(10, 12).in_lieu(10, 4).in_lieu(10, 7)
 
@@ -542,6 +542,10 @@ class Arrangement(object):
     def dbf(self):
         """端午节 Dragon Boat Festival"""
         return self.mark(chinese_calendar.Holiday.dragon_boat_festival)
+    
+    def hwv(self):
+        """高温假 Hot Weather Vacation"""
+        return self.mark(chinese_calendar.Holiday.hot_weather_vacation)
 
     def nd(self):
         """国庆节 National Day"""
